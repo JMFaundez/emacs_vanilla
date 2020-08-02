@@ -7,6 +7,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -23,6 +25,15 @@
 (add-to-list 'auto-mode-alist '("\\.usr\\'" . fortran-mode))
 (add-to-list 'auto-mode-alist '("\\.par\\'" . fortran-mode))
 (add-to-list 'auto-mode-alist '("\\SIZE\\'" . fortran-mode))
+
+;; Evil
+	;; Download Evil
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+	;; Enable Evil
+(require 'evil)
+(evil-mode 1)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General Tweaks
@@ -55,7 +66,10 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/moe-theme-1.0.0/")
 (load-theme 'moe-light t)
 
-
+;; Adjust text and soft returns
+(add-hook 'text-mode-hook #'visual-line-mode)
+(global-visual-line-mode t)
+;; (auto-fill-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Added by emacs
